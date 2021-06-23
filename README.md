@@ -1,2 +1,1 @@
-# NMT_ILA
-Neural Machine Translation for Indigenous Languages of the Americas
+# Mitigating Information Loss in Translation under Low Resource Conditions for languages with Distant Morphologies. 
