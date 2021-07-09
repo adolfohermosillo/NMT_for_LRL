@@ -1,0 +1,75 @@
+## Where the samples will be written
+save_data: data
+## Where the vocab(s) will be written
+src_vocab: data/vocab.all
+# Prevent overwriting existing files in the folder
+overwrite: False
+share_vocab: True
+share_embeddings: True
+
+# Tokenization options
+src_subword_type: sentencepiece
+src_subword_model: spm/all2_32k.model
+tgt_subword_type: sentencepiece
+tgt_subword_model: spm/all2_32k.model
+
+# Number of candidates for SentencePiece sampling
+subword_nbest: 20
+# Smoothing parameter for SentencePiece sampling
+subword_alpha: 0.1
+
+# Specific arguments for pyonmttok
+src_onmttok_kwargs: "{'mode': 'none', 'spacer_annotate': True}"
+tgt_onmttok_kwargs: "{'mode': 'none', 'spacer_annotate': True}"
+src_seq_length: 500
+tgt_seq_length: 500
+
+# Corpus opts:
+data:
+    corpus:
+        path_src: toy-ende/src-train.txt
+        path_tgt: toy-ende/tgt-train.txt
+        transforms: []
+        weight: 1
+    valid:
+        path_src: toy-ende/src-val.txt
+        path_tgt: toy-ende/tgt-val.txt
+        transforms: []
+
+
+skip_empty_level: warning
+train_steps: 200000
+save_checkpoint_steps: 4000
+valid_steps: 4000
+world_size: 1
+gpu_ranks: 0
+
+encoder_type: transformer
+decoder_type: transformer
+enc_layers: 8
+dec_layers: 8
+rnn_size: 1024
+word_vec_size: 1024
+transformer_ff: 4096
+heads: 16
+position_encoding: True
+
+share_decoder_embeddings: True
+batch_type: tokens
+normalization: tokens
+accum_count: 4
+optim: adam
+adam_beta2: 0.997
+decay_method: noam
+warmup_steps: 16000
+learning_rate: 2
+max_grad_norm: 0
+param_init: 0
+param_init_glorot: True
+dropout: 0.1
+label_smoothing: 0.1
+max_generator_batches: 16
+batch_size: 9200
+seed: 10
+model_dtype: fp16
+max_relative_positions: 4
